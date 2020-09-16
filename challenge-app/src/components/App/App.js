@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TweetContainer from '../TweetContainer/TweetContainer';
+import Twitter from '../../util/Twitter';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component() {
+  constructor(props){
+    super(props);
+    this.state = {
+      tweets = []
+    };
+
+    this.getTweets = this.getTweets.bind(this);
+  }
+
+  getTweets(firstHandle,secondHandle){
+    Twitter.getTweets(firstHandle, secondHandle).then(tweets => {
+      this.setState({tweets: tweets});
+    })
+  }
+  
+  render() {
+    return(
+      <div className="app">
+        <h1>Kanye or Elon?</h1>
+        <TweetContainer/>
+      </div>
+    )
+  };
 }
 
 export default App;
