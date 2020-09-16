@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
-import TweetContainer from '../TweetContainer/TweetContainer';
+//import TweetContainer from '../TweetContainer/TweetContainer';
 import Twitter from '../../util/Twitter';
 
 class App extends React.Component() {
@@ -24,10 +24,12 @@ class App extends React.Component() {
       <div className="app">
         <h1>Kanye or Elon?</h1>
         <SearchBar getTweets={this.getTweets}/>
-        <TweetContainer tweets={this.state.tweets}/>
+        
       </div>
     )
   };
 }
 
 export default App;
+
+//<TweetContainer tweets={this.state.tweets}/>
