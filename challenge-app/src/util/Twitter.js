@@ -9,7 +9,7 @@ const Twitter = {
         const headers = {
             Authorization: `Bearer ${bearerToken}`
         }
-        return fetch(`https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${firstHandle}&count=50`,{headers}).then(firstResponse => {
+        return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${firstHandle}&count=3200`,{headers}).then(firstResponse => {
             return firstResponse.json();
         }).then(firstJsonResponse => {
             if(firstJsonResponse[0]){
@@ -26,11 +26,11 @@ const Twitter = {
                 })
                 const firstTweetObjects = firstValidTweets.map(tweet => {
                     return {
-                        text: tweet.text,
-                        userID: tweet.user.id
+                        text: tweet.text.replace('&amp;','&'),
+                        name: tweet.user.screen_name
                     };
                 })
-                return fetch(`https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${secondHandle}&count=50`,{headers}).then(secondResponse => {
+                return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${secondHandle}&count=3200`,{headers}).then(secondResponse => {
                     return secondResponse.json();
                 }).then(secondJsonResponse => {
                     if(secondJsonResponse[0]){
@@ -47,8 +47,8 @@ const Twitter = {
                         })
                         const secondTweetObjects = secondValidTweets.map(tweet => {
                             return {
-                                text: tweet.text,
-                                userID: tweet.user.id
+                                text: tweet.text.replace('&amp;','&'),
+                                name: tweet.user.screen_name
                             };
                         })
                         return firstTweetObjects.concat(secondTweetObjects);

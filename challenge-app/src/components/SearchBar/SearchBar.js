@@ -1,48 +1,49 @@
 import React from 'react';
 import './SearchBar.css';
 
-class SearchBar extends React.Component{
-    contructor(props) {
+class SearchBar extends React.Component {
+    constructor(props) {
         super(props);
-        this.state = {
-            firstHandle = 'Kanye',
-            secondHandle = 'Elon'
-        };
 
         this.handleSearch = this.handleSearch.bind(this);
         this.handleFirstChange = this.handleFirstChange.bind(this);
         this.handleSecondChange = this.handleSecondChange.bind(this);
     }
 
+    componentDidMount() {
+        this.props.getTweets(this.props.firstHandle,this.props.secondHandle);
+    }
+
     handleSearch(event){
-        this.props.getTweets(this.state.firstHandle,this.state.secondHandle);
+        this.props.getTweets(this.props.firstHandle,this.props.secondHandle);
         event.preventDefault();
     }
 
     handleFirstChange(event){
-        this.setState({firstHandle: event.target.value});
+        this.props.handleFirstChange(event.target.value);
     }
 
     handleSecondChange(event){
-        this.setState({secondHandle: event.target.value});
+        this.props.handleSecondChange(event.target.value);
     }
 
     render() {
         return (
             <div className="SearchBar">
-                
                 <div className="SearchBar-fields">
                     <div className="firstHandle">
-                        <input onChange={this.handleFirstChange} placeholder={this.state.firstHandle}/>
+                        <input onChange={this.handleFirstChange} placeholder="user handle 1"/>
                     </div>
                     <div className="secondHandle">
-                        <input onChange={this.handleSecondChange} placeholder={this.state.secondHandle}/>
+                        <input onChange={this.handleSecondChange} placeholder="user handle 2"/>
                     </div>
                 </div>
                 <div className="SearchBar-submit">
-                    <a onClick={this.handleSearch}>Update Tweets</a>
+                    <button onClick={this.handleSearch}>Update Tweets</button>
                 </div>
             </div>
         );
     }
 }
+
+export default SearchBar;
