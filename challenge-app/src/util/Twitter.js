@@ -9,7 +9,7 @@ const Twitter = {
         const headers = {
             Authorization: `Bearer ${bearerToken}`
         }
-        return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${firstHandle}&count=3200`,{headers}).then(firstResponse => {
+        return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${firstHandle}&count=200&include_rts=false`,{headers}).then(firstResponse => {
             return firstResponse.json();
         }).then(firstJsonResponse => {
             if(firstJsonResponse[0]){
@@ -30,7 +30,7 @@ const Twitter = {
                         name: tweet.user.screen_name
                     };
                 })
-                return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${secondHandle}&count=3200`,{headers}).then(secondResponse => {
+                return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${secondHandle}&count=200&include_rts=false`,{headers}).then(secondResponse => {
                     return secondResponse.json();
                 }).then(secondJsonResponse => {
                     if(secondJsonResponse[0]){
