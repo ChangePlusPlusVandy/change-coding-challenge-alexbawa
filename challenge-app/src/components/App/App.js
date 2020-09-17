@@ -11,7 +11,8 @@ class App extends React.Component {
       tweets: [],
       selectedTweet: {},
       firstHandle: 'kanyewest',
-      secondHandle: 'elonmusk'
+      secondHandle: 'elonmusk',
+      score: [0,0]
     };
     this.getTweets = this.getTweets.bind(this);
     this.cycleTweets = this.cycleTweets.bind(this);
@@ -21,20 +22,25 @@ class App extends React.Component {
 
   getTweets(firstHandle,secondHandle){
     Twitter.getTweets(firstHandle, secondHandle).then(tweets => {
-      const tweetCount = tweets.length;
-      const selectionIndex = Math.floor(Math.random()*tweetCount);
+      const selectionIndex = Math.floor(Math.random()*tweets.length);
+      const selection = tweets[selectionIndex];
+      let nextArray = tweets;
+      nextArray.splice(selectionIndex,1)
       this.setState({
-        tweets: tweets,
-        selectedTweet: tweets[selectionIndex]
+        tweets: nextArray,
+        selectedTweet: selection
       });
     })
   }
 
   cycleTweets() {
-    const tweetCount = this.state.tweets.length;
-    const selectionIndex = Math.floor(Math.random()*tweetCount);
+    const selectionIndex = Math.floor(Math.random()*this.state.tweets.length);
+    const selection = this.state.tweets[selectionIndex];
+    let nextArray = this.state.tweets;
+    nextArray.splice(selectionIndex,1);
     this.setState({
-      selectedTweet: this.state.tweets[selectionIndex]
+      tweets: nextArray,
+      selectedTweet: selection
     });
   }
 

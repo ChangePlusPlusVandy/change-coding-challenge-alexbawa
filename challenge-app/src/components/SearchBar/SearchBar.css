@@ -13,6 +13,6 @@
     padding: 0 15px 5px 15px;
 }
 
-.SearchBar div input {
+.SearchBar-submit button, .SearchBar div input{
     height: 28px;
 }

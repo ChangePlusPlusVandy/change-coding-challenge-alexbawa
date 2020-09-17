@@ -9,12 +9,24 @@
     background-color: white;
     border: 2px lightslategray solid;
     border-radius: 12px;
-    width: 40%;
+    width: 32%;
     min-height: 150px;
     text-align: left;
 }
 
 .TweetContainer-text p {
     margin: 0 auto;
-    padding: 10px;
+    padding: 25px 15px;
+}
+
+.TweetContainer-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.TweetContainer-button button{
+    min-width: 120px;
+    height: 35px;
+    margin: 10px;
 }
