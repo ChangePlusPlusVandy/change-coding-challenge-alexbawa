@@ -30,13 +30,11 @@ class SearchBar extends React.Component {
     render() {
         return (
             <div className="SearchBar">
-                <div className="SearchBar-fields">
-                    <div className="firstHandle">
-                        <input onChange={this.handleFirstChange} placeholder="user handle 1"/>
-                    </div>
-                    <div className="secondHandle">
-                        <input onChange={this.handleSecondChange} placeholder="user handle 2"/>
-                    </div>
+                <div className="firstHandle">
+                    <input onChange={this.handleFirstChange} placeholder="user handle 1"/>
+                </div>
+                <div className="secondHandle">
+                    <input onChange={this.handleSecondChange} placeholder="user handle 2"/>
                 </div>
                 <div className="SearchBar-submit">
                     <button onClick={this.handleSearch}>Update Tweets</button>

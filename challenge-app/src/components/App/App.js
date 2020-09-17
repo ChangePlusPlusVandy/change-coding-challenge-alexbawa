@@ -49,7 +49,7 @@ class App extends React.Component {
   render() {
     return(
       <div className="app">
-        <h1>@{this.state.firstHandle} or @{this.state.secondHandle}</h1>
+        <h1>@{this.state.firstHandle} or @{this.state.secondHandle}?</h1>
         <SearchBar getTweets={this.getTweets} handleFirstChange={this.handleFirstChange} handleSecondChange={this.handleSecondChange} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle}/>
         <TweetContainer tweet={this.state.selectedTweet} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle} cycleTweets={this.cycleTweets}/>
       </div>
