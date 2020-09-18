@@ -11,18 +11,18 @@ class TweetContainer extends React.Component {
 
     guessFirst(){
         if(this.props.tweet.name === this.props.firstHandle){
-            console.log('Correct!');
+            this.props.win();
         } else {
-            console.log('Wrong!');
+            this.props.lose();
         }
         this.props.cycleTweets();
     }
 
     guessSecond(){
         if(this.props.tweet.name === this.props.secondHandle){
-            console.log('Correct!');
+            this.props.win();
         } else {
-            console.log('Wrong!');
+            this.props.lose();
         }
         this.props.cycleTweets();
     }

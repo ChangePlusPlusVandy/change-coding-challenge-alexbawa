@@ -17,3 +17,18 @@ body{
   padding: 20px 0px;
 }
 
+.result {
+  height: 30px;
+}
+
+.result div {
+  display: none;
+}
+
+.result-correct span{
+  color: green;
+}
+
+.result-wrong span{
+  color: red;
+}
