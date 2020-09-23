@@ -62,7 +62,7 @@ const Twitter = {
         const headers = {
             Authorization: `Bearer ${bearerToken}`
         }
-        return fetch(`https://api.twitter.com/2/users/by/username/${firstHandle}?user.fields=profile_image_url`,{headers}).then(firstResponse => {
+        return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/2/users/by/username/${firstHandle}?user.fields=profile_image_url`,{headers}).then(firstResponse => {
             return firstResponse.json();
         }).then(firstJsonResponse => {
             const firstProfile = {
@@ -70,7 +70,7 @@ const Twitter = {
                 name: firstJsonResponse.data.name,
                 profilePic: firstJsonResponse.data.profile_image_url
             };
-            return fetch(`https://api.twitter.com/2/users/by/username/${secondHandle}?user.fields=profile_image_url`,{headers}).then(secondResponse => {
+            return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/2/users/by/username/${secondHandle}?user.fields=profile_image_url`,{headers}).then(secondResponse => {
                 return secondResponse.json();
             }).then(secondJsonResponse => {
                 const secondProfile = {

@@ -1,5 +1,5 @@
 body{
-  background-color: lightgray;
+  background-color: #15202c;
 }
 
 .app {
@@ -11,8 +11,8 @@ body{
 .app h1 {
   font-size: 35px;
   width: 100%;
-  background-color: lightslategray;
-  color: cyan;
+  background-color: #1c78b3;
+  color: white;
   margin: 0 auto;
   padding: 20px 0px;
 }
@@ -25,10 +25,14 @@ body{
   display: none;
 }
 
-.result-correct span{
+.result-correct span {
   color: green;
 }
 
-.result-wrong span{
+.result-wrong span {
   color: red;
+}
+
+#empty-message {
+  display: none;
 }

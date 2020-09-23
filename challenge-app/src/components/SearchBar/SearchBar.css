@@ -1,5 +1,5 @@
 .SearchBar {
-    margin: 20px auto;
+    margin: 40px auto;
 }
 
 .SearchBar {
@@ -10,9 +10,29 @@
 }
 
 .SearchBar div {
-    padding: 0 15px 5px 15px;
+    margin: 0 15px;
 }
 
-.SearchBar-submit button, .SearchBar div input{
-    height: 28px;
+.SearchBar div input {
+    padding: 0 20px;
+    background-color: #253342;
+    color: white;
+    border-radius: 36px;
+    border: 2px #1c78b3 solid;
+    height: 48px;
+    width: 175px;
+}
+
+.SearchBar-submit{
+    background-color: #1c78b3;
+    border-radius: 36px;
+    color: white;
+    width: 175px;
+    cursor: pointer;
+}
+
+.SearchBar-submit p {
+    font-weight: bold;
+    padding: 17px 8px;
+    margin: 0 auto;
 }

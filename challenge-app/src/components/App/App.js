@@ -14,19 +14,20 @@ class App extends React.Component {
       secondHandle: 'elonmusk',
       score: [0,0],
       playingStatus: true,
-      choices: [
+      users: [
         {
-          username: '@elonmusk',
-          name: 'Elon Musk',
-          profilePic: ''
+          username: 'kanyewest',
+          name: 'ye',
+          profilePic: 'https://pbs.twimg.com/profile_images/1276461929934942210/cqNhNk6v_normal.jpg'
         },
         {
-          username: '@kanyewest',
-          name: 'Kanye West',
-          profilePic: ''
+          username: 'elonmusk',
+          name: 'Elon Musk',
+          profilePic: 'https://pbs.twimg.com/profile_images/1295975423654977537/dHw9JcrK_normal.jpg'
         }]
     };
     this.getTweets = this.getTweets.bind(this);
+    this.getUsers = this.getUsers.bind(this);
     this.cycleTweets = this.cycleTweets.bind(this);
     this.handleFirstChange = this.handleFirstChange.bind(this);
     this.handleSecondChange = this.handleSecondChange.bind(this);
@@ -34,7 +35,7 @@ class App extends React.Component {
     this.lose = this.lose.bind(this);
   }
 
-  getTweets(firstHandle,secondHandle){
+  getTweets(firstHandle, secondHandle) {
     Twitter.getTweets(firstHandle, secondHandle).then(tweets => {
       const selectionIndex = Math.floor(Math.random()*tweets.length);
       const selection = tweets[selectionIndex];
@@ -42,11 +43,19 @@ class App extends React.Component {
       nextArray.splice(selectionIndex,1);
       document.getElementById('result-wrong').style.display = 'none';
       document.getElementById('result-correct').style.display = 'none';
-      document.getElementById("empty-message").style.display = "none";
+      document.getElementById('empty-message').style.display = 'none';
       this.setState({
         tweets: nextArray,
         selectedTweet: selection,
         score:[0,0]
+      });
+    })
+  }
+
+  getUsers(firstHandle, secondHandle) {
+    Twitter.getProfile(firstHandle, secondHandle).then(profileArray => {
+      this.setState({
+        users: profileArray
       });
     })
   }
@@ -62,8 +71,12 @@ class App extends React.Component {
         selectedTweet: selection
       });
     } else {
-      this.state.playingStatus = false;
-      document.getElementById("empty-message").style.display = "block";
+      this.setState({
+        playingStatus: false
+      });
+      document.getElementById('empty-message').style.display = 'block';
+      document.getElementById('result-wrong').style.display = 'none';
+      document.getElementById('result-correct').style.display = 'none';
     } 
   }
 
@@ -100,6 +113,11 @@ class App extends React.Component {
     return (
       <div className="app">
         <h1>@{this.state.firstHandle} or @{this.state.secondHandle}?</h1>
+        
+        <div className="main">
+          <SearchBar getUsers={this.getUsers} getTweets={this.getTweets} handleFirstChange={this.handleFirstChange} handleSecondChange={this.handleSecondChange} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle}/>
+          <TweetContainer users={this.state.users} status={this.state.playingStatus} win={this.win} lose={this.lose} tweet={this.state.selectedTweet} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle} cycleTweets={this.cycleTweets}/>
+        </div>
         <div className="result">
           <div id="result-correct" className="result-correct">
             <p><span>Correct!</span> - Score: {Math.floor(this.state.score[0]/this.state.score[1]*100)}%</p>
@@ -107,10 +125,6 @@ class App extends React.Component {
           <div id="result-wrong" className="result-wrong">
             <p><span>Incorrect!</span> - Score: {Math.floor(this.state.score[0]/this.state.score[1]*100)}%</p>
           </div>
-        </div>
-        <div className="main">
-          <SearchBar getTweets={this.getTweets} handleFirstChange={this.handleFirstChange} handleSecondChange={this.handleSecondChange} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle}/>
-          <TweetContainer status={this.state.playingStatus} win={this.win} lose={this.lose} tweet={this.state.selectedTweet} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle} cycleTweets={this.cycleTweets}/>
         </div>
 
         <div id="empty-message">

@@ -12,10 +12,12 @@ class SearchBar extends React.Component {
 
     componentDidMount() {
         this.props.getTweets(this.props.firstHandle,this.props.secondHandle);
+        this.props.getUsers(this.props.firstHandle,this.props.secondHandle);
     }
 
     handleSearch(event){
         this.props.getTweets(this.props.firstHandle,this.props.secondHandle);
+        this.props.getUsers(this.props.firstHandle,this.props.secondHandle);
         event.preventDefault();
     }
 
@@ -31,13 +33,13 @@ class SearchBar extends React.Component {
         return (
             <div className="SearchBar">
                 <div className="firstHandle">
-                    <input onChange={this.handleFirstChange} placeholder="user handle 1"/>
+                    <input onChange={this.handleFirstChange} placeholder="Username"/>
                 </div>
                 <div className="secondHandle">
-                    <input onChange={this.handleSecondChange} placeholder="user handle 2"/>
+                    <input onChange={this.handleSecondChange} placeholder="Username"/>
                 </div>
                 <div className="SearchBar-submit">
-                    <button onClick={this.handleSearch}>Update Tweets</button>
+                    <p onClick={this.handleSearch}>Update Tweets</p>
                 </div>
             </div>
         );

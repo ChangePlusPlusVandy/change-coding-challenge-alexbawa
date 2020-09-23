@@ -35,11 +35,13 @@ class TweetContainer extends React.Component {
                     <p>{this.props.tweet.text}</p>
                 </div>
                 <div className="TweetContainer-buttons">
-                    <div className="TweetContainer-button">
-                        <button onClick={this.guessFirst}>@{this.props.firstHandle}</button>
+                    <div onClick={this.guessFirst} className="TweetContainer-button">
+                        <img src={this.props.users[0].profilePic} alt="first profile pic"></img>
+                        <p>{this.props.users[0].name} <span>@{this.props.users[0].username}</span></p>
                     </div>
-                    <div className="TweetContainer-button">
-                        <button onClick={this.guessSecond}>@{this.props.secondHandle}</button>
+                    <div onClick={this.guessSecond} className="TweetContainer-button">
+                        <img src={this.props.users[1].profilePic} alt="second profile pic"></img>
+                        <p>{this.props.users[1].name} <span>@{this.props.users[1].username}</span></p>
                     </div>
                 </div>
             </div>

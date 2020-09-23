@@ -1,13 +1,13 @@
 .TweetContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
 }
 
 .TweetContainer-text {
-    background-color: white;
-    border: 2px lightslategray solid;
+    background-color:#253342;
+    border: 2px #1c78b3 solid;
     border-radius: 12px;
     width: 32%;
     min-height: 150px;
@@ -15,18 +15,45 @@
 }
 
 .TweetContainer-text p {
+    color: white;
     margin: 0 auto;
-    padding: 25px 15px;
+    margin: 25px 15px;
 }
 
 .TweetContainer-buttons {
+    margin-left: 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
 }
 
-.TweetContainer-button button{
+.TweetContainer-button{
     min-width: 120px;
-    height: 35px;
+    height: 56px;
     margin: 10px;
+    background-color: #15202c;
+    border: 2px #1c78b3 solid;
+    color: white;
+    border-radius: 36px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.TweetContainer-button:hover{
+    background-color: #253342;
+}
+
+.TweetContainer-button span {
+    color: #1c78b3;
+}
+
+.TweetContainer-button img {
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    margin-right: 8px;
 }
