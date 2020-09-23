@@ -10,9 +10,9 @@ class TweetContainer extends React.Component {
     }
 
     guessFirst(){
-        if(this.props.tweet.name === this.props.firstHandle){
+        if(this.props.tweet.name === this.props.firstHandle && this.props.status){
             this.props.win();
-        } else {
+        } else if (this.props.status) {
             this.props.lose();
         }
         this.props.cycleTweets();
@@ -21,7 +21,7 @@ class TweetContainer extends React.Component {
     guessSecond(){
         if(this.props.tweet.name === this.props.secondHandle){
             this.props.win();
-        } else {
+        } else if (this.props.status){
             this.props.lose();
         }
         this.props.cycleTweets();

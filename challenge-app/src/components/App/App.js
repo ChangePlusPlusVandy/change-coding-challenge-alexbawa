@@ -13,6 +13,18 @@ class App extends React.Component {
       firstHandle: 'kanyewest',
       secondHandle: 'elonmusk',
       score: [0,0],
+      playingStatus: true,
+      choices: [
+        {
+          username: '@elonmusk',
+          name: 'Elon Musk',
+          profilePic: ''
+        },
+        {
+          username: '@kanyewest',
+          name: 'Kanye West',
+          profilePic: ''
+        }]
     };
     this.getTweets = this.getTweets.bind(this);
     this.cycleTweets = this.cycleTweets.bind(this);
@@ -27,23 +39,32 @@ class App extends React.Component {
       const selectionIndex = Math.floor(Math.random()*tweets.length);
       const selection = tweets[selectionIndex];
       let nextArray = tweets;
-      nextArray.splice(selectionIndex,1)
+      nextArray.splice(selectionIndex,1);
+      document.getElementById('result-wrong').style.display = 'none';
+      document.getElementById('result-correct').style.display = 'none';
+      document.getElementById("empty-message").style.display = "none";
       this.setState({
         tweets: nextArray,
-        selectedTweet: selection
+        selectedTweet: selection,
+        score:[0,0]
       });
     })
   }
 
   cycleTweets() {
-    const selectionIndex = Math.floor(Math.random()*this.state.tweets.length);
-    const selection = this.state.tweets[selectionIndex];
-    let nextArray = this.state.tweets;
-    nextArray.splice(selectionIndex,1);
-    this.setState({
-      tweets: nextArray,
-      selectedTweet: selection
-    });
+    if(this.state.tweets.length > 0){
+      const selectionIndex = Math.floor(Math.random()*this.state.tweets.length);
+      const selection = this.state.tweets[selectionIndex];
+      let nextArray = this.state.tweets;
+      nextArray.splice(selectionIndex,1);
+      this.setState({
+        tweets: nextArray,
+        selectedTweet: selection
+      });
+    } else {
+      this.state.playingStatus = false;
+      document.getElementById("empty-message").style.display = "block";
+    } 
   }
 
   win() {
@@ -81,15 +102,20 @@ class App extends React.Component {
         <h1>@{this.state.firstHandle} or @{this.state.secondHandle}?</h1>
         <div className="result">
           <div id="result-correct" className="result-correct">
-            <p><span>Correct!</span> - Press any key for the next tweet (Score: {Math.floor(this.state.score[0]/this.state.score[1]*100)}%)</p>
+            <p><span>Correct!</span> - Score: {Math.floor(this.state.score[0]/this.state.score[1]*100)}%</p>
           </div>
           <div id="result-wrong" className="result-wrong">
-            <p><span>Incorrect!</span> - Press any key for the next tweet (Score: {Math.floor(this.state.score[0]/this.state.score[1]*100)}%)</p>
+            <p><span>Incorrect!</span> - Score: {Math.floor(this.state.score[0]/this.state.score[1]*100)}%</p>
           </div>
         </div>
         <div className="main">
           <SearchBar getTweets={this.getTweets} handleFirstChange={this.handleFirstChange} handleSecondChange={this.handleSecondChange} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle}/>
-          <TweetContainer win={this.win} lose={this.lose} tweet={this.state.selectedTweet} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle} cycleTweets={this.cycleTweets}/>
+          <TweetContainer status={this.state.playingStatus} win={this.win} lose={this.lose} tweet={this.state.selectedTweet} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle} cycleTweets={this.cycleTweets}/>
+        </div>
+
+        <div id="empty-message">
+          <p>You have played all of the available tweets!</p>
+          <p>Enter new handles to get a new pool.</p>
         </div>
       </div>
     )

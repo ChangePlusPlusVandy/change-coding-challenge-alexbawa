@@ -26,7 +26,7 @@ const Twitter = {
                 })
                 const firstTweetObjects = firstValidTweets.map(tweet => {
                     return {
-                        text: tweet.text.replace('&amp;','&'),
+                        text: tweet.text.replace('&amp;','&').replace('&amp;','&'),
                         name: tweet.user.screen_name
                     };
                 })
@@ -47,7 +47,7 @@ const Twitter = {
                         })
                         const secondTweetObjects = secondValidTweets.map(tweet => {
                             return {
-                                text: tweet.text.replace('&amp;','&'),
+                                text: tweet.text.replace('&amp;','&').replace('&amp;','&'),
                                 name: tweet.user.screen_name
                             };
                         })
@@ -55,6 +55,31 @@ const Twitter = {
                     }
                 })
             }
+        })
+    },
+
+    getProfile(firstHandle, secondHandle) {
+        const headers = {
+            Authorization: `Bearer ${bearerToken}`
+        }
+        return fetch(`https://api.twitter.com/2/users/by/username/${firstHandle}?user.fields=profile_image_url`,{headers}).then(firstResponse => {
+            return firstResponse.json();
+        }).then(firstJsonResponse => {
+            const firstProfile = {
+                username: firstHandle,
+                name: firstJsonResponse.data.name,
+                profilePic: firstJsonResponse.data.profile_image_url
+            };
+            return fetch(`https://api.twitter.com/2/users/by/username/${secondHandle}?user.fields=profile_image_url`,{headers}).then(secondResponse => {
+                return secondResponse.json();
+            }).then(secondJsonResponse => {
+                const secondProfile = {
+                    username: secondHandle,
+                    name: secondJsonResponse.data.name,
+                    profilePic: secondJsonResponse.data.profile_image_url
+                }
+                return [firstProfile,secondProfile];
+            })
         })
     }
 }
