@@ -23,6 +23,8 @@ body{
 
 .result div {
   display: none;
+  color: white;
+  padding: 16px;
 }
 
 .result-correct span {
@@ -35,4 +37,9 @@ body{
 
 #empty-message {
   display: none;
+  color: white;
+}
+
+#empty-message span{
+  color: #1c78b3;
 }

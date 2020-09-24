@@ -26,6 +26,7 @@ class App extends React.Component {
           profilePic: 'https://pbs.twimg.com/profile_images/1295975423654977537/dHw9JcrK_normal.jpg'
         }]
     };
+
     this.getTweets = this.getTweets.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.cycleTweets = this.cycleTweets.bind(this);
@@ -128,7 +129,7 @@ class App extends React.Component {
         </div>
 
         <div id="empty-message">
-          <p>You have played all of the available tweets!</p>
+          <p>You have played all of the available tweets! Your final score was <span>{Math.floor(this.state.score[0]/this.state.score[1]*100)}%</span>.</p>
           <p>Enter new handles to get a new pool.</p>
         </div>
       </div>

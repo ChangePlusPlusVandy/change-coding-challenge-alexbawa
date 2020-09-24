@@ -19,15 +19,20 @@ const Twitter = {
                         works = false;
                     } else if (tweet.entities.urls[0]){
                         works = false;
-                    } else if (tweet.entities.media){
-                        works = false;
                     }
                     return works;
                 })
                 const firstTweetObjects = firstValidTweets.map(tweet => {
+                    let firstPictureArray;
+                    if (tweet.entities.media){
+                        firstPictureArray = tweet.entities.media.map(picture => {
+                            return picture.media_url;
+                        })
+                    }
                     return {
                         text: tweet.text.replace('&amp;','&').replace('&amp;','&'),
-                        name: tweet.user.screen_name
+                        name: tweet.user.screen_name,
+                        pictures: firstPictureArray
                     };
                 })
                 return fetch(`https://cors-anywhere.herokuapp.com/https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${secondHandle}&count=200&include_rts=false`,{headers}).then(secondResponse => {
@@ -40,15 +45,21 @@ const Twitter = {
                                 works = false;
                             } else if (tweet.entities.urls[0]){
                                 works = false;
-                            } else if (tweet.entities.media){
-                                works = false;
                             }
                             return works;
                         })
+                        
                         const secondTweetObjects = secondValidTweets.map(tweet => {
+                            let secondPictureArray;
+                            if (tweet.entities.media){
+                                secondPictureArray = tweet.entities.media.map(picture => {
+                                    return picture.media_url;
+                                })
+                            }
                             return {
                                 text: tweet.text.replace('&amp;','&').replace('&amp;','&'),
-                                name: tweet.user.screen_name
+                                name: tweet.user.screen_name,
+                                pictures: secondPictureArray
                             };
                         })
                         return firstTweetObjects.concat(secondTweetObjects);

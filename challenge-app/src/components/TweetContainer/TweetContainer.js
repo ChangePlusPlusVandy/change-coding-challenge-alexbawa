@@ -7,6 +7,8 @@ class TweetContainer extends React.Component {
 
         this.guessFirst = this.guessFirst.bind(this);
         this.guessSecond = this.guessSecond.bind(this);
+        this.renderPictures = this.renderPictures.bind(this);
+        this.renderText = this.renderText.bind(this);
     }
 
     guessFirst(){
@@ -27,12 +29,41 @@ class TweetContainer extends React.Component {
         this.props.cycleTweets();
     }
 
+    renderPictures(){
+        if(this.props.tweet.pictures) {
+            return this.props.tweet.pictures.map(picture => {
+                return <img alt="picture from twitter" src={picture}></img>
+            })
+        } else {
+            return;
+        }
+    }
+
+    renderText(){
+        if(this.props.tweet.text){
+            const linkCheck = this.props.tweet.text.indexOf('https://t.co/')
+            if(linkCheck === 0){
+                return <p style={{display:'none'}}></p>
+            } else if(linkCheck === -1){
+                return <p style={{display:'block'}}>{this.props.tweet.text}</p>
+            } else {
+                return <p style={{display:'block'}}>{this.props.tweet.text.substring(0,linkCheck)}</p>
+            }
+        } else {
+            return <p style={{display:'none'}}></p>
+        }
+        
+    }
+
 
     render() {
         return (
             <div className="TweetContainer">
-                <div className="TweetContainer-text">
-                    <p>{this.props.tweet.text}</p>
+                <div className="TweetContainer-text" id="TweetContainer-text">
+                    {this.renderText()}
+                    <div className="TweetContainer-images">
+                        {this.renderPictures()}
+                    </div>
                 </div>
                 <div className="TweetContainer-buttons">
                     <div onClick={this.guessFirst} className="TweetContainer-button">
