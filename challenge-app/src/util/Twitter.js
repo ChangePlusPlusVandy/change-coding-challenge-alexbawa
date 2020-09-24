@@ -22,6 +22,7 @@ const Twitter = {
                     }
                     return works;
                 })
+                
                 const firstTweetObjects = firstValidTweets.map(tweet => {
                     let firstPictureArray;
                     if (tweet.entities.media){
@@ -48,7 +49,6 @@ const Twitter = {
                             }
                             return works;
                         })
-                        
                         const secondTweetObjects = secondValidTweets.map(tweet => {
                             let secondPictureArray;
                             if (tweet.entities.media){

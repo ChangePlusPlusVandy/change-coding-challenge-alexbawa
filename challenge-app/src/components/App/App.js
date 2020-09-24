@@ -26,7 +26,7 @@ class App extends React.Component {
           profilePic: 'https://pbs.twimg.com/profile_images/1295975423654977537/dHw9JcrK_normal.jpg'
         }]
     };
-
+    
     this.getTweets = this.getTweets.bind(this);
     this.getUsers = this.getUsers.bind(this);
     this.cycleTweets = this.cycleTweets.bind(this);
@@ -48,7 +48,8 @@ class App extends React.Component {
       this.setState({
         tweets: nextArray,
         selectedTweet: selection,
-        score:[0,0]
+        score:[0,0],
+        playingStatus: true
       });
     })
   }

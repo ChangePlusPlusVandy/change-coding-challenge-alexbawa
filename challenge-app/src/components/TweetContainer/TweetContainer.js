@@ -32,7 +32,7 @@ class TweetContainer extends React.Component {
     renderPictures(){
         if(this.props.tweet.pictures) {
             return this.props.tweet.pictures.map(picture => {
-                return <img alt="picture from twitter" src={picture}></img>
+                return <img key="picture" alt="twitter" src={picture}></img>
             })
         } else {
             return;
