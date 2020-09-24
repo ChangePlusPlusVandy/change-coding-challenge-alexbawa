@@ -43,35 +43,48 @@ class App extends React.Component {
   getTweets(firstHandle, secondHandle) {
     Twitter.getTweets(firstHandle, secondHandle).then(tweets => {
       
-      //Choose next tweet
-      const selectionIndex = Math.floor(Math.random()*tweets.length);
-      const selection = tweets[selectionIndex];
-      let nextArray = tweets;
+      //Check if usernames were valid and returned tweets
+      if(tweets) {
+        //Choose next tweet
+        const selectionIndex = Math.floor(Math.random()*tweets.length);
+        const selection = tweets[selectionIndex];
+        let nextArray = tweets;
 
-      //Remove tweet from array
-      nextArray.splice(selectionIndex,1);
+        //Remove tweet from array
+        nextArray.splice(selectionIndex,1);
 
-      //Turn off win/lose/game over messages
-      document.getElementById('result-wrong').style.display = 'none';
-      document.getElementById('result-correct').style.display = 'none';
-      document.getElementById('empty-message').style.display = 'none';
+        //Turn off error/win/lose/game over messages
+        document.getElementById('result-wrong').style.display = 'none';
+        document.getElementById('result-correct').style.display = 'none';
+        document.getElementById('empty-message').style.display = 'none';
+        document.getElementById('invalidHandles').style.display = 'none';
 
-      //Set game to first round state
-      this.setState({
-        tweets: nextArray,
-        selectedTweet: selection,
-        score:[0,0],
-        playingStatus: true
-      });
+        //Set game to first round state
+        this.setState({
+          tweets: nextArray,
+          selectedTweet: selection,
+          score:[0,0],
+          playingStatus: true
+        });
+      } else {
+
+        //Display error message and set state to game over
+        document.getElementById('invalidHandles').style.display = 'block';
+        this.setState({
+          playingStatus: false
+        });
+      }
     })
   }
 
   //Call getProfile() from Twitter.js, set profiles in state
   getUsers(firstHandle, secondHandle) {
     Twitter.getProfile(firstHandle, secondHandle).then(profileArray => {
-      this.setState({
-        users: profileArray
-      });
+      if(profileArray){
+        this.setState({
+          users: profileArray
+        });
+      }
     })
   }
 
@@ -159,6 +172,10 @@ class App extends React.Component {
         <div className="main">
           <SearchBar getUsers={this.getUsers} getTweets={this.getTweets} handleFirstChange={this.handleFirstChange} handleSecondChange={this.handleSecondChange} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle}/>
           <TweetContainer users={this.state.users} status={this.state.playingStatus} win={this.win} lose={this.lose} tweet={this.state.selectedTweet} firstHandle={this.state.firstHandle} secondHandle={this.state.secondHandle} cycleTweets={this.cycleTweets}/>
+        </div>
+
+        <div id="invalidHandles">
+          <p>Please make sure both usernames are valid.</p>
         </div>
 
         <div className="result">

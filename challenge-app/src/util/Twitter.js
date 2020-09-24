@@ -87,8 +87,12 @@ const Twitter = {
 
                         //return combination of two tweet arrays
                         return firstTweetObjects.concat(secondTweetObjects);
+                    } else {
+                        return null;
                     }
                 })
+            } else {
+                return null;
             }
         })
     },
@@ -126,7 +130,13 @@ const Twitter = {
 
                 //Return array of two profile objects
                 return [firstProfile,secondProfile];
+            }).catch(error => {
+                console.log(error);
+                return null;
             })
+        }).catch(error => {
+            console.log(error);
+            return null;
         })
     }
 }
